@@ -19,6 +19,11 @@ class LaboratoryTest {
     }
 
     @Test
+    void testEmptySubstance() {
+        Laboratory lab = new Laboratory(List.of("eau", ""));
+    }
+
+    @Test
     void testGetQuantityUnknownSubstanceThrows() {
         Laboratory lab = new Laboratory(List.of("eau", "sel"));
         assertThrows(IllegalArgumentException.class, () -> lab.getQuantity("sucre"));

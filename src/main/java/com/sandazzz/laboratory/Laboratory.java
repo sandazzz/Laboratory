@@ -12,6 +12,7 @@ public class Laboratory {
             stock.put(s, 0.0);
         }
     }
+
      public double getQuantity(String substance) {
          if (!stock.containsKey(substance)) {
              throw new IllegalArgumentException("Unknown substance: " + substance);
