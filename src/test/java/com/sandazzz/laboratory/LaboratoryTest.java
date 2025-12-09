@@ -11,4 +11,11 @@ class LaboratoryTest {
     void testInitializationWithValidSubstances() {
         assertDoesNotThrow(() -> new Laboratory(List.of("eau", "sel", "sucre")));
     }
+
+    @Test
+    void testInitialQuantityIsZero() {
+        Laboratory lab = new Laboratory(List.of("eau", "sel"));
+        assertEquals(0.0, lab.getQuantity("eau"));
+    }
+
 }
