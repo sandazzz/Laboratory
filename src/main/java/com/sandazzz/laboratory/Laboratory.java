@@ -25,11 +25,15 @@ public class Laboratory {
         }
     }
 
-     public double getQuantity(String substance) {
-         if (!stock.containsKey(substance)) {
-             throw new IllegalArgumentException("Unknown substance: " + substance);
-         }
-         System.out.println(stock.get(substance));
+    public double getQuantity(String substance) {
+        if (!stock.containsKey(substance)) {
+            throw new IllegalArgumentException("Unknown substance: " + substance);
+        }
+        System.out.println(stock.get(substance));
         return stock.get(substance);
-     }
+    }
+
+    public void add( String substance, double quantity) {
+        stock.put(substance, stock.get(substance) + quantity);
+    }
 }
