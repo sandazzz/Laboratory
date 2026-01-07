@@ -55,5 +55,13 @@ class LaboratoryTest {
         );
     }
 
+    @Test
+    void testAddIncreasesQuantity() {
+        Laboratory lab = new Laboratory(List.of("eau", "sel"));
+
+        lab.add("eau", 1.5);
+
+        assertEquals(1.5, lab.getQuantity("eau"));
+    }
 
 }
