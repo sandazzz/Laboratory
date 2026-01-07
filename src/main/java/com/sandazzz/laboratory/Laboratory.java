@@ -34,8 +34,16 @@ public class Laboratory {
     }
 
     public void add( String substance, double quantity) {
+        if (substance == null || substance.isBlank()) {
+            throw new IllegalArgumentException("Substance name cannot be empty.");
+        }
+
         if (!stock.containsKey(substance)) {
             throw new IllegalArgumentException("Unknown substance: " + substance);
+        }
+
+        if (quantity < 0 ) {
+            throw new IllegalArgumentException("Quantity must be positive.");
         }
 
         stock.put(substance, stock.get(substance) + quantity);
