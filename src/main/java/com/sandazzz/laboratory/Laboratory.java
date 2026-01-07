@@ -42,7 +42,7 @@ public class Laboratory {
             throw new IllegalArgumentException("Unknown substance: " + substance);
         }
 
-        if (quantity < 0 ) {
+        if (quantity <= 0 ) {
             throw new IllegalArgumentException("Quantity must be positive.");
         }
 
