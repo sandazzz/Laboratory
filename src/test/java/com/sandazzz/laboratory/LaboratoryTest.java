@@ -33,4 +33,12 @@ class LaboratoryTest {
         Laboratory lab = new Laboratory(List.of("eau", "sel"));
         assertThrows(IllegalArgumentException.class, () -> lab.getQuantity("sucre"));
     }
+
+    @Test
+    void testInitializationWithDuplicateSubstancesThrows() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Laboratory(List.of("eau", "eau"))
+        );
+    }
+
 }
