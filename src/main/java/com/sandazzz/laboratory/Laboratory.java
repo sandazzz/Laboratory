@@ -12,6 +12,11 @@ public class Laboratory {
             if (s.isEmpty()){
                 throw new IllegalArgumentException("Empty substance list");
             }
+
+            if (stock.containsKey(s)) {
+                throw new IllegalArgumentException("Duplicate substance: " + s);
+            }
+
             stock.put(s, 0.0);
         }
     }
