@@ -73,4 +73,14 @@ class LaboratoryTest {
 
         assertEquals(4.5, lab.getQuantity("eau"));
     }
+
+    @Test
+    void testAddUnknownSubstanceThrows() {
+        Laboratory lab = new Laboratory(List.of("eau"));
+
+        assertThrows(IllegalArgumentException.class, () ->
+                lab.add("sel", 1.0)
+        );
+    }
+
 }
