@@ -34,18 +34,28 @@ public class Laboratory {
     }
 
     public void add( String substance, double quantity) {
+        validateSubstanceName(substance);
+        validateKnownSubstance(substance);
+        validateQuantity(quantity);
+
+        stock.put(substance, stock.get(substance) + quantity);
+    }
+
+    private void validateSubstanceName(String substance) {
         if (substance == null || substance.isBlank()) {
             throw new IllegalArgumentException("Substance name cannot be empty.");
         }
+    }
 
+    private void validateKnownSubstance(String substance) {
         if (!stock.containsKey(substance)) {
             throw new IllegalArgumentException("Unknown substance: " + substance);
         }
+    }
 
-        if (quantity <= 0 ) {
+    private void validateQuantity(double quantity) {
+        if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity must be positive.");
         }
-
-        stock.put(substance, stock.get(substance) + quantity);
     }
 }
