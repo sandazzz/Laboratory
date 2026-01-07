@@ -91,4 +91,14 @@ class LaboratoryTest {
                 lab.add("eau", -1.0)
         );
     }
+
+    @Test
+    void testAddZeroQuantityThrows() {
+        Laboratory lab = new Laboratory(List.of("eau"));
+
+        assertThrows(IllegalArgumentException.class, () ->
+                lab.add("eau", 0.0)
+        );
+    }
+
 }
