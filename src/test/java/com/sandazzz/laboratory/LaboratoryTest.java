@@ -64,4 +64,13 @@ class LaboratoryTest {
         assertEquals(1.5, lab.getQuantity("eau"));
     }
 
+    @Test
+    void testAddIsCumulative() {
+        Laboratory lab = new Laboratory(List.of("eau"));
+
+        lab.add("eau", 1.0);
+        lab.add("eau", 3.5);
+
+        assertEquals(4.5, lab.getQuantity("eau"));
+    }
 }
