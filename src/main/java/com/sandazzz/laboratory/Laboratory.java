@@ -9,6 +9,9 @@ public class Laboratory {
 
     public Laboratory(List<String> substances) {
         for (String s : substances) {
+            if (s.isEmpty()){
+                throw new IllegalArgumentException("Empty substance list");
+            }
             stock.put(s, 0.0);
         }
     }
@@ -17,6 +20,7 @@ public class Laboratory {
          if (!stock.containsKey(substance)) {
              throw new IllegalArgumentException("Unknown substance: " + substance);
          }
+         System.out.println(stock.get(substance));
         return stock.get(substance);
      }
 }

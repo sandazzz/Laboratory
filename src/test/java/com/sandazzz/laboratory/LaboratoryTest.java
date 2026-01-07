@@ -20,7 +20,12 @@ class LaboratoryTest {
 
     @Test
     void testEmptySubstance() {
-        Laboratory lab = new Laboratory(List.of("eau", ""));
+        IllegalArgumentException ex = assertThrows(
+                IllegalArgumentException.class,
+                () -> new Laboratory(List.of("eau", ""))
+        );
+
+        assertEquals("Empty substance list", ex.getMessage());
     }
 
     @Test
