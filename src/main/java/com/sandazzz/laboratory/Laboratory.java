@@ -8,6 +8,10 @@ public class Laboratory {
     private final Map<String, Double>stock = new HashMap<>();
 
     public Laboratory(List<String> substances) {
+        if (substances == null || substances.isEmpty()) {
+            throw new IllegalArgumentException("Substance list cannot be null or empty.");
+        }
+
         for (String s : substances) {
             if (s.isEmpty()){
                 throw new IllegalArgumentException("Empty substance list");
