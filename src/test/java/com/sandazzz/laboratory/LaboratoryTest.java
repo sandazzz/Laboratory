@@ -41,4 +41,19 @@ class LaboratoryTest {
         );
     }
 
+    @Test
+    void testInitializationWithEmptyListThrows() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Laboratory(List.of())
+        );
+    }
+
+    @Test
+    void testInitializationWithNullListThrows() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Laboratory(null)
+        );
+    }
+
+
 }
