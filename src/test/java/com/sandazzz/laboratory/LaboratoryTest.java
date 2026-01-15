@@ -118,4 +118,19 @@ class LaboratoryTest {
         );
     }
 
+    @Test
+    void testInitializationWithValidReactions() {
+        List<String> substances = List.of("hydrogen", "oxygen");
+
+        Map<String, List<Map.Entry<Double, String>>> reactions = Map.of(
+                "water", List.of(
+                        Map.entry(2.0, "hydrogen"),
+                        Map.entry(1.0, "oxygen")
+                )
+        );
+
+        assertDoesNotThrow(() -> new Laboratory(substances, reactions));
+    }
+
+
 }
