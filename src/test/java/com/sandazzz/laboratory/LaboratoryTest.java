@@ -197,4 +197,29 @@ class LaboratoryTest {
         assertEquals(2.0, lab.getQuantity("water"));
     }
 
+    @Test
+    void testMakeWithProductAsIngredient() {
+        List<String> substances = List.of("hydrogen", "oxygen");
+
+        Map<String, List<Map.Entry<Double, String>>> reactions = Map.of(
+                "B", List.of(
+                        Map.entry(2.0, "hydrogen")
+                ),
+                "A", List.of(
+                        Map.entry(1.0, "B"),
+                        Map.entry(1.0, "oxygen")
+                )
+        );
+
+        Laboratory lab = new Laboratory(substances, reactions);
+        lab.add("hydrogen", 10);
+        lab.add("oxygen", 5);
+
+        double produced = lab.make("A", 2);
+
+        assertEquals(2.0, produced);
+        assertEquals(6.0, lab.getQuantity("hydrogen"));
+        assertEquals(3.0, lab.getQuantity("oxygen"));
+        assertEquals(2.0, lab.getQuantity("A"));
+    }
 }
