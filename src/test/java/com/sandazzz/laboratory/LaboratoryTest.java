@@ -157,4 +157,22 @@ class LaboratoryTest {
                 () -> lab.make("water", 1.0));
     }
 
+    @Test
+    void testMakeWithNonPositiveQuantityThrows() {
+        List<String> substances = List.of("hydrogen", "oxygen");
+
+        Map<String, List<Map.Entry<Double, String>>> reactions = Map.of(
+                "water", List.of(
+                        Map.entry(2.0, "hydrogen"),
+                        Map.entry(1.0, "oxygen")
+                )
+        );
+
+        Laboratory lab = new Laboratory(substances, reactions);
+
+        assertThrows(IllegalArgumentException.class,
+                () -> lab.make("water", 0.0));
+    }
+
+
 }
