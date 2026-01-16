@@ -2,6 +2,7 @@ package com.sandazzz.laboratory;
 
 import org.junit.jupiter.api.Test;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -132,5 +133,20 @@ class LaboratoryTest {
         assertDoesNotThrow(() -> new Laboratory(substances, reactions));
     }
 
+    @Test
+    void testProductIsInitializedWithZeroQuantity() {
+        List<String> substances = List.of("hydrogen", "oxygen");
+
+        Map<String, List<Map.Entry<Double, String>>> reactions = Map.of(
+                "water", List.of(
+                        Map.entry(2.0, "hydrogen"),
+                        Map.entry(1.0, "oxygen")
+                )
+        );
+
+        Laboratory lab = new Laboratory(substances, reactions);
+
+        assertEquals(0.0, lab.getQuantity("water"));
+    }
 
 }
