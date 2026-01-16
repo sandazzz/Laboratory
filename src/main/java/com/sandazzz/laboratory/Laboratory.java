@@ -92,7 +92,13 @@ public class Laboratory {
             double neededPerUnit = ing.getKey();
             String name = ing.getValue();
 
-            double available = stock.get(name);
+            double available;
+            if (reactions.containsKey(name)) {
+                available = make(name, Double.POSITIVE_INFINITY);
+            } else {
+                available = stock.get(name);
+            }
+
             max = Math.min(max, available / neededPerUnit);
         }
 
