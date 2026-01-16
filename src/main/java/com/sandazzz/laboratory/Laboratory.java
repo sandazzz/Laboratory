@@ -77,6 +77,14 @@ public class Laboratory {
         stock.put(substance, stock.get(substance) + quantity);
     }
 
+    public double make(String product, double quantity) {
+        if (!reactions.containsKey(product)) {
+            throw new IllegalArgumentException("Unknown product: " + product);
+        }
+        return 0.0;
+    }
+
+
     private void validateSubstanceName(String substance) {
         if (substance == null || substance.isBlank()) {
             throw new IllegalArgumentException("Substance name cannot be empty.");
