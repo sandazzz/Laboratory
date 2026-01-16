@@ -149,4 +149,12 @@ class LaboratoryTest {
         assertEquals(0.0, lab.getQuantity("water"));
     }
 
+    @Test
+    void testMakeUnknownProductThrows() {
+        Laboratory lab = new Laboratory(List.of("hydrogen", "oxygen"));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> lab.make("water", 1.0));
+    }
+
 }
