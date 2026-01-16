@@ -85,30 +85,24 @@ public class Laboratory {
             throw new IllegalArgumentException("Unknown product: " + product);
         }
 
+        // 1) calcul du max faisable (sans modifier le stock)
+        double max = Math.min(quantity, availableQuantity(product));
+
+        // 2) consommation réelle
         List<Map.Entry<Double, String>> ingredients = reactions.get(product);
 
-        double max = quantity;
         for (var ing : ingredients) {
-            double neededPerUnit = ing.getKey();
             String name = ing.getValue();
+            double needed = ing.getKey() * max;
 
-            double available;
             if (reactions.containsKey(name)) {
-                available = make(name, Double.POSITIVE_INFINITY);
-            } else {
-                available = stock.get(name);
+                make(name, needed); // production réelle
             }
 
-            max = Math.min(max, available / neededPerUnit);
+            stock.put(name, stock.get(name) - needed);
         }
 
-        for (var ing : ingredients) {
-            stock.put(
-                    ing.getValue(),
-                    stock.get(ing.getValue()) - max * ing.getKey()
-            );
-        }
-
+        // 3) production
         stock.put(product, stock.get(product) + max);
 
         return max;
@@ -131,4 +125,27 @@ public class Laboratory {
             throw new IllegalArgumentException("Quantity must be positive.");
         }
     }
+
+    private double availableQuantity(String name) {
+        // substance simple
+        if (!reactions.containsKey(name)) {
+            return stock.get(name);
+        }
+
+        // produit : on calcule combien on PEUT en fabriquer
+        List<Map.Entry<Double, String>> ingredients = reactions.get(name);
+
+        double max = Double.POSITIVE_INFINITY;
+
+        for (var ing : ingredients) {
+            double needed = ing.getKey();
+            String ingredientName = ing.getValue();
+
+            double available = availableQuantity(ingredientName);
+            max = Math.min(max, available / needed);
+        }
+
+        return max;
+    }
+
 }
