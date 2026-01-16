@@ -78,6 +78,10 @@ public class Laboratory {
     }
 
     public double make(String product, double quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be positive.");
+        }
+
         if (!reactions.containsKey(product)) {
             throw new IllegalArgumentException("Unknown product: " + product);
         }
