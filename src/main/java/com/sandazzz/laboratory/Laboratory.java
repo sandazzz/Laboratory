@@ -81,13 +81,32 @@ public class Laboratory {
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity must be positive.");
         }
-
         if (!reactions.containsKey(product)) {
             throw new IllegalArgumentException("Unknown product: " + product);
         }
-        return 0.0;
-    }
 
+        List<Map.Entry<Double, String>> ingredients = reactions.get(product);
+
+        double max = quantity;
+        for (var ing : ingredients) {
+            double neededPerUnit = ing.getKey();
+            String name = ing.getValue();
+
+            double available = stock.get(name);
+            max = Math.min(max, available / neededPerUnit);
+        }
+
+        for (var ing : ingredients) {
+            stock.put(
+                    ing.getValue(),
+                    stock.get(ing.getValue()) - max * ing.getKey()
+            );
+        }
+
+        stock.put(product, stock.get(product) + max);
+
+        return max;
+    }
 
     private void validateSubstanceName(String substance) {
         if (substance == null || substance.isBlank()) {
