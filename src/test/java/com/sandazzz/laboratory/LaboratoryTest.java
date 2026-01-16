@@ -174,5 +174,27 @@ class LaboratoryTest {
                 () -> lab.make("water", 0.0));
     }
 
+    @Test
+    void testMakeConsumesIngredientsAndProducesProduct() {
+        List<String> substances = List.of("hydrogen", "oxygen");
+
+        Map<String, List<Map.Entry<Double, String>>> reactions = Map.of(
+                "water", List.of(
+                        Map.entry(2.0, "hydrogen"),
+                        Map.entry(1.0, "oxygen")
+                )
+        );
+
+        Laboratory lab = new Laboratory(substances, reactions);
+        lab.add("hydrogen", 10);
+        lab.add("oxygen", 5);
+
+        double produced = lab.make("water", 2);
+
+        assertEquals(2.0, produced);
+        assertEquals(6.0, lab.getQuantity("hydrogen"));
+        assertEquals(3.0, lab.getQuantity("oxygen"));
+        assertEquals(2.0, lab.getQuantity("water"));
+    }
 
 }
